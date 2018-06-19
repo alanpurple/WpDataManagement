@@ -1,0 +1,21 @@
+{
+  "name": "wp-data-management",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "WpDataManagement",
+  "author": {
+    "name": "alanp"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.5",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.5.0"
+  }
+}
