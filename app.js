@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 
 const PosData = require('./models/PosData');
 const WepickDeal = require('./models/WepickDeal');
-const DealW2v = require('./models/DealW2v');
 
 const app = express();
 
@@ -19,9 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// log from 4-1 to 4-11
-for (let i = 1; i < 12; i++) {
-    let datestr = '2018-04-';
+// log from 3-11 to 3-31
+for (let i = 11; i < 32; i++) {
+    let datestr = '2018-03-';
     if (i>9)
         datestr += i+' ';
     else
