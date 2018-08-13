@@ -18,9 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// log from 3-11 to 3-31
-for (let i = 11; i < 32; i++) {
-    let datestr = '2018-03-';
+// log from 4-01 to 4-11
+for (let i = 1; i < 12; i++) {
+    let datestr = '2018-04-';
     if (i>9)
         datestr += i+' ';
     else
@@ -31,12 +31,14 @@ for (let i = 11; i < 32; i++) {
             finalstr = datestr + '0' + k;
         else
             finalstr = datestr + k;
-        for (let j = 1; j < 61; j++)
+        for (let j = 61; j < 100; j++)
             PosData.aggregate([
                 { $match: { $and: [{ TransDate: finalstr }, {WepickRank: j }]} },
                 { $sortByCount: '$DealId' },
                 {$limit:1}
             ]).then(data => {
+                if (i == 11 && k == 23 && j == 99)
+                    console.log('almost over');
                 if (!data)
                     return;
                 else if (data.length == 0)
