@@ -2,7 +2,7 @@
 const Schema = mongoose.Schema;
 
 const PosDataSchema = new Schema({
-    DealId: Number,
+    DealId: { type: Number, ref: 'DealW2v' },
     UserId: { type: Number, unique: true },
     WepickRank: Number,
     TransDate: String,
