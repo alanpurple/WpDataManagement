@@ -31,7 +31,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="connection-praha.js" />
     <Compile Include="connection.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\Category1.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\Category2.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\DealW2v.js">
@@ -43,6 +50,9 @@
     <Compile Include="models\WepickDeal.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="models_praha\DealInfo.js" />
+    <Compile Include="models_praha\MemberActionInfo.js" />
+    <Compile Include="models_praha\MemberInfo.js" />
     <Compile Include="set-mongoose.js">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="models_praha\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

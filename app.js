@@ -8,6 +8,10 @@ const bodyParser = require('body-parser');
 
 const PosData = require('./models/PosData');
 const WepickDeal = require('./models/WepickDeal');
+const Deal = require('./models/DealW2v');
+const Category1 = require('./models/Category1');
+const Category2 = require('./models/Category2');
+const PrahaDeal = require('./models_praha/DealInfo');
 
 const app = express();
 
@@ -18,8 +22,45 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+Deal.find({ _id: { $gte: 30000, $lt: 500000 } }).then(deals =>
+    deals.forEach(deal => {
+        if (deal.title)
+            if (deal.title.length > 0)
+                return;
+        PrahaDeal.findOne({ did: deal._id })
+            .then(pdeal => {
+                if (!pdeal)
+                    return;
+                if (pdeal.t.ti1)
+                    Category1.findById(pdeal.t.ti1).then(ct1 => {
+                        if (!ct1)
+                            return Category1.create({
+                                _id: pdeal.t.ti1,
+                                name: pdeal.t.tn1
+                            });
+                    }).catch(err => console.error(err));
+                if (pdeal.t.ti2)
+                    Category2.findById(pdeal.t.ti2).then(ct2 => {
+                        if (!ct2)
+                            return Category2.create({
+                                _id: pdeal.t.ti2,
+                                name: pdeal.t.tn2
+                            });
+                    }).catch(err => console.error(err));
+                deal.title = pdeal.mn;
+                if (pdeal.t.ti1)
+                    deal.category1 = pdeal.t.ti1;
+                if (pdeal.t.ti2)
+                    deal.category2 = pdeal.t.ti2;
+                return deal.save().then(() => {
+                    if (deal == deals[deals.length - 1])
+                        console.log('last one saved');
+                });
+            })
+    })).catch(err => console.error(err));
+
 // log from 4-01 to 4-11
-for (let i = 1; i < 12; i++) {
+/*for (let i = 1; i < 12; i++) {
     let datestr = '2018-04-';
     if (i>9)
         datestr += i+' ';
@@ -54,4 +95,4 @@ for (let i = 1; i < 12; i++) {
                 return slotdata.save();
             }).catch(err => console.error(err));
     }
-}
+}*/
