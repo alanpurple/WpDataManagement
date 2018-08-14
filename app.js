@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-Deal.find({ _id: { $gte: 30000, $lt: 500000 } }).then(deals =>
+Deal.find({ _id: { $gte: 100000, $lt: 110000 } }).then(deals =>
     deals.forEach(deal => {
         if (deal.title)
             if (deal.title.length > 0)
@@ -53,7 +53,7 @@ Deal.find({ _id: { $gte: 30000, $lt: 500000 } }).then(deals =>
                 if (pdeal.t.ti2)
                     deal.category2 = pdeal.t.ti2;
                 return deal.save().then(() => {
-                    if (deal == deals[deals.length - 1])
+                    if (deal === deals[deals.length - 1])
                         console.log('last one saved');
                 });
             })
